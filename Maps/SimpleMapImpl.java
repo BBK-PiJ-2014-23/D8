@@ -2,6 +2,12 @@
  * Map from integer to Strings
  */
 public class SimpleMapImpl implements SimpleMap {
+    StringNode first;
+    
+    public SimpleMapImpl() {
+        first = null;
+    }
+    
     /**
      * Puts a new String in the map.
      *
