@@ -3,8 +3,8 @@ public class StringNode {
     String name;
     StringNode next;
     
-    public StringNode(String name) {
-        this.key = HashUtilities.shortHash(name.hashCode());
+    public StringNode(int key, String name) {
+        this.key = key;
         this.name = name;
         this.next = null;
     }
