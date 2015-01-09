@@ -6,6 +6,7 @@ public class StringNode {
     public StringNode(String name) {
         this.key = HashUtilities.shortHash(name.hashCode());
         this.name = name;
+        this.next = null;
     }
     
     public int getKey() {
