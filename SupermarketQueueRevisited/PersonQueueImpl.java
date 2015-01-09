@@ -15,7 +15,7 @@ public class PersonQueueImpl implements PersonQueue {
     
     public Person retrieve() {
         int iterator = array.length - 1;
-        while (array[iterator] == null) {
+        while (iterator > 0 && array[iterator] == null) {
             iterator--;
         }
         Person retrieved = array[iterator];
