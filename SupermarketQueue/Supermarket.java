@@ -6,21 +6,11 @@ public class Supermarket {
     }
     
     public void addPerson(Person person) {
-        PersonQueueNode node = new PersonQueueNodeImpl(person);
-        queue.insert(node);
+        queue.insert(person);
     }
     
-    public void servePerson() {
-        queue.retrieve();
-    }
-    
-    public void printQueue() {
-        PersonQueueNode current = queue.getFirst();
-        while (current != null) {
-            System.out.println(current.getPerson().getName());
-            current = current.getNext();
-        }
-        System.out.println();
+    public Person servePerson() {
+        return queue.retrieve();
     }
     
     public static void main (String[] args) {
@@ -29,8 +19,8 @@ public class Supermarket {
         supermarket.addPerson(new Person("Stefan"));
         supermarket.addPerson(new Person("Hans"));
         supermarket.addPerson(new Person("Sepp"));
-        supermarket.printQueue();
-        supermarket.servePerson();
-        supermarket.printQueue();
+
+        System.out.println(supermarket.servePerson().getName());
+
     }
 }
