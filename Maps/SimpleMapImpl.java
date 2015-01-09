@@ -3,18 +3,25 @@
  */
 public class SimpleMapImpl implements SimpleMap {
     StringNode first;
-    
+
     public SimpleMapImpl() {
         first = null;
     }
-    
+
     /**
      * Puts a new String in the map.
      *
      * If the key is already in the map, nothing is done.
      */
     public void put(int key, String name) {
+        StringNode iterator = first;
+        while (iterator.getNext().getKey() != key) {
+            iterator = iterator.getNext();
+        }
 
+        if (iterator.getNext() == null) {
+            iterator.setNext(new StringNode(name));
+        }
     }
 
     /**
@@ -22,7 +29,16 @@ public class SimpleMapImpl implements SimpleMap {
      * or null if there is none.
      */
     public String get(int key) {
-        return "dummy";
+        StringNode iterator = first;
+        while (iterator != null && iterator.getKey() != key) {
+            iterator = iterator.getNext();
+        }
+
+        if (iterator == null) {
+            return null;
+        } else {
+            return iterator.getName();
+        }
     }
 
     /**
@@ -32,7 +48,14 @@ public class SimpleMapImpl implements SimpleMap {
     }
      */
     public void remove(int key) {
-        
+        StringNode iterator = first;
+        while (iterator.getNext() != null && iterator.getNext().getKey() != key) {
+            iterator = iterator.getNext();
+        }
+
+        if (iterator.getNext() != null) {
+            iterator.setNext(iterator.getNext().getNext());
+        }
     }
 
     /**
@@ -40,7 +63,11 @@ public class SimpleMapImpl implements SimpleMap {
      * false otherwise
      */
     public boolean isEmpty() {
-        return false;
+        if (first == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
