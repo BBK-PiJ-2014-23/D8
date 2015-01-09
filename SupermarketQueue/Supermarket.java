@@ -21,6 +21,9 @@ public class Supermarket {
         supermarket.addPerson(new Person("Sepp"));
 
         System.out.println(supermarket.servePerson().getName());
+        System.out.println(supermarket.servePerson().getName());
+        System.out.println(supermarket.servePerson().getName());
+        System.out.println(supermarket.servePerson());
 
     }
 }
