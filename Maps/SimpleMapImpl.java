@@ -14,13 +14,17 @@ public class SimpleMapImpl implements SimpleMap {
      * If the key is already in the map, nothing is done.
      */
     public void put(int key, String name) {
-        StringNode iterator = first;
-        while (iterator.getNext().getKey() != key) {
-            iterator = iterator.getNext();
-        }
+        if (isEmpty()) {
+            first = new StringNode(key, name);
+        } else {
+            StringNode iterator = first;
+            while (iterator.getNext() != null && iterator.getKey() != key) {
+                iterator = iterator.getNext();
+            }
 
-        if (iterator.getNext() == null) {
-            iterator.setNext(new StringNode(name));
+            if (iterator.getKey() != key) {
+                iterator.setNext(new StringNode(key, name));
+            }
         }
     }
 
@@ -48,13 +52,17 @@ public class SimpleMapImpl implements SimpleMap {
     }
      */
     public void remove(int key) {
-        StringNode iterator = first;
-        while (iterator.getNext() != null && iterator.getNext().getKey() != key) {
-            iterator = iterator.getNext();
-        }
+        if (!isEmpty() && first.getKey() == key) {
+            first = first.getNext();
+        } else if (!isEmpty()) {
+            StringNode iterator = first;
+            while (iterator.getNext() != null && iterator.getNext().getKey() != key) {
+                iterator = iterator.getNext();
+            }
 
-        if (iterator.getNext() != null) {
-            iterator.setNext(iterator.getNext().getNext());
+            if (iterator.getNext() != null && iterator.getNext().getKey() == key) {
+                iterator.setNext(iterator.getNext().getNext());
+            }
         }
     }
 
