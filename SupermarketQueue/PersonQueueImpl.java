@@ -1,51 +1,33 @@
 public class PersonQueueImpl implements PersonQueue {
-    PersonQueueNode first;
+    Person first;
     
     public PersonQueueImpl() {
         first = null;
     }
     
-    public PersonQueueNode getFirst() {
-        return first;
-    }
-    
-    public void insert(PersonQueueNode node) {
-        if (size() == 0) {
-            first = node;
+    public void insert(Person person) {
+        if (first == null) {
+            first = person;
         } else {
-            PersonQueueNode temp = first;
-            first = node;
+            Person temp = first;
+            first = person;
             first.setNext(temp);
         }
     }
     
     public Person retrieve() {
         Person delPerson = null;
-        if (first.getNext() == null) {
-            delPerson = first.getPerson();
+        if (first != null && first.getNext() == null) {
+            delPerson = first;
             first = null;
-        } else {
-            PersonQueueNode current = first;
+        } else if (first != null) {
+            Person current = first;
             while (current.getNext().getNext() != null) {
                 current = current.getNext();
             }
-            delPerson = current.getNext().getPerson();
+            delPerson = current.getNext();
             current.setNext(null);
         }
         return delPerson;
-    }
-    
-    public int size() {
-        if (first == null) {
-            return 0;
-        } else {
-            PersonQueueNode current = first;
-            int counter = 1;
-            while (current.getNext() != null) {
-                counter++;
-                current = current.getNext();
-            }
-            return counter;
-        }
     }
 }
